@@ -102,11 +102,11 @@ void Tab::create_preset_tab(PresetBundle *preset_bundle)
 // 	m_btn_hide_incompatible_presets->Bind(wxEVT_BUTTON, ([this](wxCommandEvent e){
 // 		toggle_show_hide_incompatible();
 // 	}));
-// 
-// 	// Initialize the DynamicPrintConfig by default keys/values.
-// 	build();
-// 	rebuild_page_tree();
-// 	update();
+
+	// Initialize the DynamicPrintConfig by default keys/values.
+	build();
+	rebuild_page_tree();
+	update();
 }
 
 PageShp Tab::add_options_page(wxString title, std::string icon, bool is_extruder_pages/* = false*/)
