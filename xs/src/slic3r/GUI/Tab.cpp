@@ -24,6 +24,7 @@ namespace GUI {
 // sub new
 void Tab::create_preset_tab(PresetBundle *preset_bundle)
 {
+	std::cerr << "Start creating Tab::" << name() << "\n";
 	m_preset_bundle = preset_bundle;
 
 	// Vertical sizer to hold the choice menu and the rest of the page.
@@ -107,6 +108,7 @@ void Tab::create_preset_tab(PresetBundle *preset_bundle)
 	build();
 	rebuild_page_tree();
 	update();
+	std::cerr << "Creating Tab::" << title().ToStdString() << " is completed\n";
 }
 
 PageShp Tab::add_options_page(wxString title, std::string icon, bool is_extruder_pages/* = false*/)
