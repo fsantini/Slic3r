@@ -314,6 +314,7 @@ void add_created_tab(Tab* panel, PresetBundle *preset_bundle, AppConfig *app_con
 {
 	panel->m_show_btn_incompatible_presets = app_config->get("show_incompatible_presets").empty();
 	panel->create_preset_tab(preset_bundle);
+	wxButton *btn = new wxButton(panel, wxID_ANY, "Ku-ku", wxDefaultPosition, wxDefaultSize, wxBORDER_NONE);
 
 	// Load the currently selected preset into the GUI, update the preset selection box.
 	panel->load_current_preset();
