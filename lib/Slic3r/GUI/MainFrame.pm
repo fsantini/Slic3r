@@ -213,29 +213,32 @@ sub _init_tabpanel {
     $self->{is_disabled_button_browse} = (!eval "use Net::Bonjour; 1") ? 1 : 0 ;
     # A variable to inform C++ Tab implementation about user_agent
     $self->{is_user_agent} = (eval "use LWP::UserAgent; 1") ? 1 : 0 ;    
+
+    # experiments: if I create additional tab on perl side
+    {
+        my $additional_tab = Wx::Panel->new($panel, -1, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL);
+        my $btn = Wx::Button->new($additional_tab, -1, "Ku-ku");
+    
+        # Vertical sizer to hold the button.
+        my $sizer = Wx::BoxSizer->new(wxVERTICAL);
+        $sizer->SetSizeHints($additional_tab);
+        $additional_tab->SetSizer($sizer);
+        $sizer->Add($btn, 1, wxLEFT | wxRIGHT | wxTOP | wxALIGN_CENTER_VERTICAL, 3);
+        
+
+        $panel->AddPage($additional_tab, "additional_tab");
+    }
+
     Slic3r::GUI::create_preset_tabs(wxTheApp->{preset_bundle}, wxTheApp->{app_config}, 
                                     $self->{no_controller}, $self->{is_disabled_button_browse},
                                     $self->{is_user_agent},
                                     $VALUE_CHANGE_EVENT, $PRESETS_CHANGED_EVENT,
-                                    $BUTTON_BROWSE_EVENT, $BUTTON_TEST_EVENT);
+                                    $BUTTON_BROWSE_EVENT, $BUTTON_TEST_EVENT);    
     $self->{options_tabs} = {};
     for my $tab_name (qw(print filament printer)) {
         $self->{options_tabs}{$tab_name} = Slic3r::GUI::get_preset_tab("$tab_name");
     }
 
-    # experiments: if I create additional tab on perl side
-    {
-        my $additional_tab = Wx::Panel->new($panel, -1, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL);#, wxBK_LEFT | wxTAB_TRAVERSAL);
-        my $btn = Wx::Button->new($additional_tab, -1, "Ku-ku");#, -1, wxDefaultPosition, wxDefaultSize, wxBORDER_NONE);
-    
-        # Vertical sizer to hold the choice menu and the rest of the page.
-        #$self->{sizer} = Wx::BoxSizer->new(wxVERTICAL);
-        #$self->{sizer}->SetSizeHints($self);
-        #$self->SetSizer($self->{sizer});
-
-        $panel->AddPage($additional_tab, "additional_tab");
-    }
-    
     if ($self->{plater}) {
         $self->{plater}->on_select_preset(sub {
             my ($group, $name) = @_;
