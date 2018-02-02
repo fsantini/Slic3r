@@ -9,7 +9,7 @@ use File::Basename qw(basename dirname);
 use FindBin;
 use List::Util qw(min first);
 use Slic3r::Geometry qw(X Y);
-use Wx qw(:frame :bitmap :id :misc :notebook :panel :sizer :menu :dialog :filedialog
+use Wx qw(:frame :bitmap :button :id :misc :notebook :panel :sizer :menu :dialog :filedialog
     :font :icon wxTheApp);
 use Wx::Event qw(EVT_CLOSE EVT_COMMAND EVT_MENU EVT_NOTEBOOK_PAGE_CHANGED);
 use base 'Wx::Frame';
@@ -221,6 +221,19 @@ sub _init_tabpanel {
     $self->{options_tabs} = {};
     for my $tab_name (qw(print filament printer)) {
         $self->{options_tabs}{$tab_name} = Slic3r::GUI::get_preset_tab("$tab_name");
+    }
+
+    # experiments: if I create additional tab on perl side
+    {
+        my $additional_tab = Wx::Panel->new($panel, -1, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL);#, wxBK_LEFT | wxTAB_TRAVERSAL);
+        my $btn = Wx::Button->new($additional_tab, -1, "Ku-ku");#, -1, wxDefaultPosition, wxDefaultSize, wxBORDER_NONE);
+    
+        # Vertical sizer to hold the choice menu and the rest of the page.
+        #$self->{sizer} = Wx::BoxSizer->new(wxVERTICAL);
+        #$self->{sizer}->SetSizeHints($self);
+        #$self->SetSizer($self->{sizer});
+
+        $panel->AddPage($additional_tab, "additional_tab");
     }
     
     if ($self->{plater}) {
