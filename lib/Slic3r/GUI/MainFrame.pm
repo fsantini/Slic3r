@@ -264,6 +264,21 @@ sub _init_tabpanel {
     #$self->{options_tabs2}{print} = Slic3r::GUI::get_preset_tab("print");
     #$self->{options_tabs2}{filament} = Slic3r::GUI::get_preset_tab("filament");
     #$self->{options_tabs2}{printer} = Slic3r::GUI::get_preset_tab("printer");
+
+    # experiments: if I create additional tab on perl side
+    {
+        my $additional_tab = Wx::Panel->new($panel, -1, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL);
+        my $btn = Wx::Button->new($additional_tab, -1, "Ku-ku");
+    
+        # Vertical sizer to hold the button.
+        my $sizer = Wx::BoxSizer->new(wxVERTICAL);
+        $sizer->SetSizeHints($additional_tab);
+        $additional_tab->SetSizer($sizer);
+        $sizer->Add($btn, 1, wxLEFT | wxRIGHT | wxTOP | wxALIGN_CENTER_VERTICAL, 3);
+        
+
+        $panel->AddPage($additional_tab, "additional_tab");
+    }
     
     if ($self->{plater}) {
         $self->{plater}->on_select_preset(sub {
