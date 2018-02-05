@@ -317,7 +317,7 @@ void add_created_tab(Tab* panel, PresetBundle *preset_bundle, AppConfig *app_con
 	wxButton *btn = new wxButton(panel, wxID_ANY, "Ku-ku", wxDefaultPosition, wxDefaultSize, wxBORDER_NONE);
 
 	// Load the currently selected preset into the GUI, update the preset selection box.
-	panel->load_current_preset();
+//	panel->load_current_preset();
 	g_wxTabPanel->AddPage(panel, panel->title());
 }
 

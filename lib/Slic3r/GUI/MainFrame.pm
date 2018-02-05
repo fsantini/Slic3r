@@ -255,17 +255,7 @@ sub _init_tabpanel {
     # A variable to inform C++ Tab implementation about disabling of Browse button
     $self->{is_disabled_button_browse} = (!eval "use Net::Bonjour; 1") ? 1 : 0 ;
     # A variable to inform C++ Tab implementation about user_agent
-    $self->{is_user_agent} = (eval "use LWP::UserAgent; 1") ? 1 : 0 ;    
-    #Slic3r::GUI::create_preset_tabs(wxTheApp->{preset_bundle}, wxTheApp->{app_config}, 
-    #                                $self->{no_controller}, $self->{is_disabled_button_browse},
-    #                                $self->{is_user_agent},
-    #                                $VALUE_CHANGE_EVENT, $PRESETS_CHANGED_EVENT,
-    #                                $BUTTON_BROWSE_EVENT, $BUTTON_TEST_EVENT);
-    #$self->{options_tabs2}{print} = Slic3r::GUI::get_preset_tab("print");
-    #$self->{options_tabs2}{filament} = Slic3r::GUI::get_preset_tab("filament");
-    #$self->{options_tabs2}{printer} = Slic3r::GUI::get_preset_tab("printer");
-
-    Slic3r::GUI::create_experimental_tab();
+    $self->{is_user_agent} = (eval "use LWP::UserAgent; 1") ? 1 : 0 ;
 
     # experiments: if I create additional tab on perl side
     {
@@ -281,7 +271,17 @@ sub _init_tabpanel {
 
         $panel->AddPage($additional_tab, "additional_Perl_tab");
     }
-    
+    Slic3r::GUI::create_experimental_tab();
+
+    Slic3r::GUI::create_preset_tabs(wxTheApp->{preset_bundle}, wxTheApp->{app_config}, 
+                                    $self->{no_controller}, $self->{is_disabled_button_browse},
+                                    $self->{is_user_agent},
+                                    $VALUE_CHANGE_EVENT, $PRESETS_CHANGED_EVENT,
+                                    $BUTTON_BROWSE_EVENT, $BUTTON_TEST_EVENT);
+    #$self->{options_tabs2}{print} = Slic3r::GUI::get_preset_tab("print");
+    #$self->{options_tabs2}{filament} = Slic3r::GUI::get_preset_tab("filament");
+    #$self->{options_tabs2}{printer} = Slic3r::GUI::get_preset_tab("printer");
+
     if ($self->{plater}) {
         $self->{plater}->on_select_preset(sub {
             my ($group, $name) = @_;
