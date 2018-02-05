@@ -83,26 +83,26 @@ void Tab::create_preset_tab(PresetBundle *preset_bundle)
 	m_treectrl->SetIndent(0);
 	m_disable_tree_sel_changed_event = 0;
 
-// 	m_treectrl->Bind(wxEVT_TREE_SEL_CHANGED, &Tab::OnTreeSelChange, this);
-// 	m_treectrl->Bind(wxEVT_KEY_DOWN, &Tab::OnKeyDown, this);
-// 
-// 	m_presets_choice->Bind(wxEVT_COMBOBOX, ([this](wxCommandEvent e){
-// 		//! Because of The MSW and GTK version of wxBitmapComboBox derived from wxComboBox, 
-// 		//! but the OSX version derived from wxOwnerDrawnCombo, instead of:
-// 		//! select_preset(m_presets_choice->GetStringSelection().ToStdString()); 
-// 		//! we doing next:
-// 		int selected_item = m_presets_choice->GetSelection();
-// 		if (selected_item >= 0){
-// 			std::string slected_string = m_presets_choice->GetString(selected_item).ToStdString();
-// 			select_preset(slected_string);
-// 		}
-// 	}));
-// 
-// 	m_btn_save_preset->Bind(wxEVT_BUTTON, ([this](wxCommandEvent e){ save_preset(); }));
-// 	m_btn_delete_preset->Bind(wxEVT_BUTTON, ([this](wxCommandEvent e){ delete_preset(); }));
-// 	m_btn_hide_incompatible_presets->Bind(wxEVT_BUTTON, ([this](wxCommandEvent e){
-// 		toggle_show_hide_incompatible();
-// 	}));
+	m_treectrl->Bind(wxEVT_TREE_SEL_CHANGED, &Tab::OnTreeSelChange, this);
+	m_treectrl->Bind(wxEVT_KEY_DOWN, &Tab::OnKeyDown, this);
+
+	m_presets_choice->Bind(wxEVT_COMBOBOX, ([this](wxCommandEvent e){
+		//! Because of The MSW and GTK version of wxBitmapComboBox derived from wxComboBox, 
+		//! but the OSX version derived from wxOwnerDrawnCombo, instead of:
+		//! select_preset(m_presets_choice->GetStringSelection().ToStdString()); 
+		//! we doing next:
+		int selected_item = m_presets_choice->GetSelection();
+		if (selected_item >= 0){
+			std::string slected_string = m_presets_choice->GetString(selected_item).ToUTF8().data();
+			select_preset(slected_string);
+		}
+	}));
+
+	m_btn_save_preset->Bind(wxEVT_BUTTON, ([this](wxCommandEvent e){ save_preset(); }));
+	m_btn_delete_preset->Bind(wxEVT_BUTTON, ([this](wxCommandEvent e){ delete_preset(); }));
+	m_btn_hide_incompatible_presets->Bind(wxEVT_BUTTON, ([this](wxCommandEvent e){
+		toggle_show_hide_incompatible();
+	}));
 
 	// Initialize the DynamicPrintConfig by default keys/values.
 	build();
