@@ -331,4 +331,17 @@ void show_info(wxWindow* parent, std::string message, std::string title){
 	msg_wingow->ShowModal();
 }
 
+void create_experimental_tab()
+{
+	auto additional_tab = new wxPanel(g_wxTabPanel, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL);
+	auto btn = new wxButton(additional_tab, wxID_ANY, "Ku-ku Cpp");
+    
+    // Vertical sizer to hold the button.
+    auto sizer = new wxBoxSizer(wxVERTICAL);
+    sizer->SetSizeHints(additional_tab);
+    additional_tab->SetSizer(sizer);
+    sizer->Add(btn, 1, wxLEFT | wxRIGHT | wxTOP | wxALIGN_CENTER_VERTICAL, 3);
+	g_wxTabPanel->AddPage(additional_tab, "additional_Cpp_tab");
+}
+
 } }

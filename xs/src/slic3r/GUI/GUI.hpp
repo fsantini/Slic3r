@@ -62,6 +62,7 @@ TabIface* get_preset_tab_iface(char *name);
 void add_created_tab(Tab* panel, PresetBundle *preset_bundle, AppConfig *app_config);
 // Change option value in config
 void change_opt_value(DynamicPrintConfig& config, t_config_option_key opt_key, boost::any value);
+void create_experimental_tab();
 
 void show_error(wxWindow* parent, std::string message);
 void show_info(wxWindow* parent, std::string message, std::string title);

@@ -46,3 +46,6 @@ void create_preset_tabs(PresetBundle *preset_bundle, AppConfig *app_config,
 
 Ref<TabIface> get_preset_tab(char *name)
     %code%{ RETVAL=Slic3r::GUI::get_preset_tab_iface(name); %};
+
+void create_experimental_tab()
+    %code%{ Slic3r::GUI::create_experimental_tab(); %};

@@ -265,10 +265,12 @@ sub _init_tabpanel {
     #$self->{options_tabs2}{filament} = Slic3r::GUI::get_preset_tab("filament");
     #$self->{options_tabs2}{printer} = Slic3r::GUI::get_preset_tab("printer");
 
+    Slic3r::GUI::create_experimental_tab();
+
     # experiments: if I create additional tab on perl side
     {
         my $additional_tab = Wx::Panel->new($panel, -1, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL);
-        my $btn = Wx::Button->new($additional_tab, -1, "Ku-ku");
+        my $btn = Wx::Button->new($additional_tab, -1, "Ku-ku Perl");
     
         # Vertical sizer to hold the button.
         my $sizer = Wx::BoxSizer->new(wxVERTICAL);
@@ -277,7 +279,7 @@ sub _init_tabpanel {
         $sizer->Add($btn, 1, wxLEFT | wxRIGHT | wxTOP | wxALIGN_CENTER_VERTICAL, 3);
         
 
-        $panel->AddPage($additional_tab, "additional_tab");
+        $panel->AddPage($additional_tab, "additional_Perl_tab");
     }
     
     if ($self->{plater}) {
