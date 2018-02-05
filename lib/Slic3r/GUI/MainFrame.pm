@@ -256,20 +256,20 @@ sub _init_tabpanel {
     $self->{is_disabled_button_browse} = (!eval "use Net::Bonjour; 1") ? 1 : 0 ;
     # A variable to inform C++ Tab implementation about user_agent
     $self->{is_user_agent} = (eval "use LWP::UserAgent; 1") ? 1 : 0 ;    
-    Slic3r::GUI::create_preset_tabs(wxTheApp->{preset_bundle}, wxTheApp->{app_config}, 
-                                    $self->{no_controller}, $self->{is_disabled_button_browse},
-                                    $self->{is_user_agent},
-                                    $VALUE_CHANGE_EVENT, $PRESETS_CHANGED_EVENT,
-                                    $BUTTON_BROWSE_EVENT, $BUTTON_TEST_EVENT);
-    $self->{options_tabs2}{print} = Slic3r::GUI::get_preset_tab("print");
-    $self->{options_tabs2}{filament} = Slic3r::GUI::get_preset_tab("filament");
-    $self->{options_tabs2}{printer} = Slic3r::GUI::get_preset_tab("printer");
+    #Slic3r::GUI::create_preset_tabs(wxTheApp->{preset_bundle}, wxTheApp->{app_config}, 
+    #                                $self->{no_controller}, $self->{is_disabled_button_browse},
+    #                                $self->{is_user_agent},
+    #                                $VALUE_CHANGE_EVENT, $PRESETS_CHANGED_EVENT,
+    #                                $BUTTON_BROWSE_EVENT, $BUTTON_TEST_EVENT);
+    #$self->{options_tabs2}{print} = Slic3r::GUI::get_preset_tab("print");
+    #$self->{options_tabs2}{filament} = Slic3r::GUI::get_preset_tab("filament");
+    #$self->{options_tabs2}{printer} = Slic3r::GUI::get_preset_tab("printer");
     
     if ($self->{plater}) {
         $self->{plater}->on_select_preset(sub {
             my ($group, $name) = @_;
             $self->{options_tabs}{$group}->select_preset($name);
-            $self->{options_tabs2}{$group}->select_preset($name);#!
+    #        $self->{options_tabs2}{$group}->select_preset($name);#!
         });
         # load initial config
         my $full_config = wxTheApp->{preset_bundle}->full_config;
@@ -664,7 +664,7 @@ sub load_config_file {
     # Dont proceed further if the config file cannot be loaded.
     return if Slic3r::GUI::catch_error($self);
     $_->load_current_preset for (values %{$self->{options_tabs}});
-    $_->load_current_preset for (values %{$self->{options_tabs2}});#!
+    #$_->load_current_preset for (values %{$self->{options_tabs2}});#!
     wxTheApp->{app_config}->update_config_dir(dirname($file));
     $last_config = $file;
 }
@@ -718,9 +718,9 @@ sub load_configbundle {
     }
 
     #! Load the currently selected preset into the GUI, update the preset selection box.
-    foreach my $tab (values %{$self->{options_tabs2}}) {
-        $tab->load_current_preset;
-    }
+    #foreach my $tab (values %{$self->{options_tabs2}}) {
+    #    $tab->load_current_preset;
+    #}
     
     my $message = sprintf "%d presets successfully imported.", $presets_imported;
     Slic3r::GUI::show_info($self, $message);
@@ -731,7 +731,7 @@ sub load_configbundle {
 sub load_config {
     my ($self, $config) = @_;
     $_->load_config($config) foreach values %{$self->{options_tabs}};
-    $_->load_config($config) foreach values %{$self->{options_tabs2}};#!
+    #$_->load_config($config) foreach values %{$self->{options_tabs2}};#!
     $self->{plater}->on_config_change($config) if $self->{plater};
 }
 
@@ -772,9 +772,9 @@ sub config_wizard {
         }
 
         #! Load the currently selected preset into the GUI, update the preset selection box.
-        foreach my $tab (values %{$self->{options_tabs2}}) {
-            $tab->load_current_preset;
-        }
+        #foreach my $tab (values %{$self->{options_tabs2}}) {
+        #    $tab->load_current_preset;
+        #}
     }
 }
 
@@ -787,9 +787,9 @@ sub check_unsaved_changes {
     foreach my $tab (values %{$self->{options_tabs}}) {
         push @dirty, $tab->title if $tab->{presets}->current_is_dirty;
     }
-    foreach my $tab (values %{$self->{options_tabs2}}) { #!
-        push @dirty, $tab->title if $tab->current_preset_is_dirty;
-    }
+    #foreach my $tab (values %{$self->{options_tabs2}}) { #!
+    #    push @dirty, $tab->title if $tab->current_preset_is_dirty;
+    #}
     
     if (@dirty) {
         my $titles = join ', ', @dirty;
@@ -840,9 +840,9 @@ sub update_ui_from_settings {
     for my $tab_name (qw(print filament printer)) {
         $self->{options_tabs}{$tab_name}->update_ui_from_settings;
     }
-    for my $tab_name (qw(print filament printer)) {
-        $self->{options_tabs2}{$tab_name}->update_ui_from_settings;#!
-    }
+    #for my $tab_name (qw(print filament printer)) {
+    #    $self->{options_tabs2}{$tab_name}->update_ui_from_settings;#!
+    #}
 }
 
 1;
