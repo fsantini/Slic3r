@@ -262,9 +262,9 @@ sub _init_tabpanel {
                                     $self->{is_user_agent},
                                     $VALUE_CHANGE_EVENT, $PRESETS_CHANGED_EVENT,
                                     $BUTTON_BROWSE_EVENT, $BUTTON_TEST_EVENT);
-    $self->{options_tabs2}{print} = Slic3r::GUI::get_preset_tab("print");
-    $self->{options_tabs2}{filament} = Slic3r::GUI::get_preset_tab("filament");
-    $self->{options_tabs2}{printer} = Slic3r::GUI::get_preset_tab("printer");
+    #$self->{options_tabs2}{print} = Slic3r::GUI::get_preset_tab("print");
+    #$self->{options_tabs2}{filament} = Slic3r::GUI::get_preset_tab("filament");
+    #$self->{options_tabs2}{printer} = Slic3r::GUI::get_preset_tab("printer");
 
     if ($self->{plater}) {
         $self->{plater}->on_select_preset(sub {
