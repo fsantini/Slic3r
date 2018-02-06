@@ -257,20 +257,6 @@ sub _init_tabpanel {
     # A variable to inform C++ Tab implementation about user_agent
     $self->{is_user_agent} = (eval "use LWP::UserAgent; 1") ? 1 : 0 ;
 
-    # experiments: if I create additional tab on perl side
-    {
-        my $additional_tab = Wx::Panel->new($panel, -1, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL);
-        my $btn = Wx::Button->new($additional_tab, -1, "Ku-ku Perl");
-    
-        # Vertical sizer to hold the button.
-        my $sizer = Wx::BoxSizer->new(wxVERTICAL);
-        $sizer->SetSizeHints($additional_tab);
-        $additional_tab->SetSizer($sizer);
-        $sizer->Add($btn, 1, wxLEFT | wxRIGHT | wxTOP | wxALIGN_CENTER_VERTICAL, 3);
-        
-
-        $panel->AddPage($additional_tab, "additional_Perl_tab");
-    }
     Slic3r::GUI::create_experimental_tab();
 
     Slic3r::GUI::create_preset_tabs(wxTheApp->{preset_bundle}, wxTheApp->{app_config}, 

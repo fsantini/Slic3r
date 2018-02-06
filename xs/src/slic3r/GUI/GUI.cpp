@@ -192,9 +192,9 @@ void create_preset_tabs(PresetBundle *preset_bundle, AppConfig *app_config,
 						int event_button_browse, int event_button_test)
 {	
 	add_created_tab(new TabPrint	(g_wxTabPanel, no_controller), preset_bundle, app_config);
-// 	add_created_tab(new TabFilament	(g_wxTabPanel, no_controller), preset_bundle, app_config);
+	add_created_tab(new TabFilament	(g_wxTabPanel, no_controller), preset_bundle, app_config);
 // 	add_created_tab(new TabPrinter	(g_wxTabPanel, no_controller, is_disabled_button_browse, is_user_agent), 
-// 					preset_bundle, app_config);
+//  					preset_bundle, app_config);
 // 	g_wxTabPanel->Bind(wxEVT_NOTEBOOK_PAGE_CHANGED, ([](wxCommandEvent e){
 // 		Tab* panel = (Tab*)g_wxTabPanel->GetCurrentPage();
 // 		if (panel->GetName().compare("Print Settings")==0 ||
