@@ -316,7 +316,7 @@ void add_created_tab(Tab* panel, PresetBundle *preset_bundle, AppConfig *app_con
 	panel->create_preset_tab(preset_bundle);
 	
 	// Load the currently selected preset into the GUI, update the preset selection box.
-//	panel->load_current_preset();
+	panel->load_current_preset();
 	g_wxTabPanel->AddPage(panel, panel->title());
 }
 
