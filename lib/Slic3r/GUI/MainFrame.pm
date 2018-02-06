@@ -257,7 +257,7 @@ sub _init_tabpanel {
     # A variable to inform C++ Tab implementation about user_agent
     $self->{is_user_agent} = (eval "use LWP::UserAgent; 1") ? 1 : 0 ;
 
-    Slic3r::GUI::create_experimental_tab();
+    #Slic3r::GUI::create_experimental_tab();
 
     Slic3r::GUI::create_preset_tabs(wxTheApp->{preset_bundle}, wxTheApp->{app_config}, 
                                     $self->{no_controller}, $self->{is_disabled_button_browse},
