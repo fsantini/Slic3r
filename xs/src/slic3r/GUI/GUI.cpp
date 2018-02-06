@@ -201,18 +201,18 @@ void create_preset_tabs(PresetBundle *preset_bundle, AppConfig *app_config,
 // 			panel->GetName().compare("Filament Settings") == 0)
 // 			panel->OnActivate();
 // 	}), g_wxTabPanel->GetId() );
-// 	for (size_t i = 0; i < g_wxTabPanel->GetPageCount(); ++ i) {
-// 		Tab *tab = dynamic_cast<Tab*>(g_wxTabPanel->GetPage(i));
-// 		if (! tab)
-// 			continue;
-// 		tab->set_event_value_change(wxEventType(event_value_change));
-// 		tab->set_event_presets_changed(wxEventType(event_presets_changed));
-// 		if (tab->name() == "printer"){
-// 			TabPrinter* tab_printer = static_cast<TabPrinter*>(tab);
-// 			tab_printer->set_event_button_browse(wxEventType(event_button_browse));
-// 			tab_printer->set_event_button_test(wxEventType(event_button_test));
-// 		}
-// 	}
+	for (size_t i = 0; i < g_wxTabPanel->GetPageCount(); ++ i) {
+		Tab *tab = dynamic_cast<Tab*>(g_wxTabPanel->GetPage(i));
+		if (! tab)
+			continue;
+		tab->set_event_value_change(wxEventType(event_value_change));
+		tab->set_event_presets_changed(wxEventType(event_presets_changed));
+		if (tab->name() == "printer"){
+			TabPrinter* tab_printer = static_cast<TabPrinter*>(tab);
+			tab_printer->set_event_button_browse(wxEventType(event_button_browse));
+			tab_printer->set_event_button_test(wxEventType(event_button_test));
+		}
+	}
 }
 
 TabIface* get_preset_tab_iface(char *name)
