@@ -192,27 +192,27 @@ void create_preset_tabs(PresetBundle *preset_bundle, AppConfig *app_config,
 						int event_button_browse, int event_button_test)
 {	
 	add_created_tab(new TabPrint	(g_wxTabPanel, no_controller), preset_bundle, app_config);
-	add_created_tab(new TabFilament	(g_wxTabPanel, no_controller), preset_bundle, app_config);
-	add_created_tab(new TabPrinter	(g_wxTabPanel, no_controller, is_disabled_button_browse, is_user_agent), 
-					preset_bundle, app_config);
-	g_wxTabPanel->Bind(wxEVT_NOTEBOOK_PAGE_CHANGED, ([](wxCommandEvent e){
-		Tab* panel = (Tab*)g_wxTabPanel->GetCurrentPage();
-		if (panel->GetName().compare("Print Settings")==0 ||
-			panel->GetName().compare("Filament Settings") == 0)
-			panel->OnActivate();
-	}), g_wxTabPanel->GetId() );
-	for (size_t i = 0; i < g_wxTabPanel->GetPageCount(); ++ i) {
-		Tab *tab = dynamic_cast<Tab*>(g_wxTabPanel->GetPage(i));
-		if (! tab)
-			continue;
-		tab->set_event_value_change(wxEventType(event_value_change));
-		tab->set_event_presets_changed(wxEventType(event_presets_changed));
-		if (tab->name() == "printer"){
-			TabPrinter* tab_printer = static_cast<TabPrinter*>(tab);
-			tab_printer->set_event_button_browse(wxEventType(event_button_browse));
-			tab_printer->set_event_button_test(wxEventType(event_button_test));
-		}
-	}
+// 	add_created_tab(new TabFilament	(g_wxTabPanel, no_controller), preset_bundle, app_config);
+// 	add_created_tab(new TabPrinter	(g_wxTabPanel, no_controller, is_disabled_button_browse, is_user_agent), 
+// 					preset_bundle, app_config);
+// 	g_wxTabPanel->Bind(wxEVT_NOTEBOOK_PAGE_CHANGED, ([](wxCommandEvent e){
+// 		Tab* panel = (Tab*)g_wxTabPanel->GetCurrentPage();
+// 		if (panel->GetName().compare("Print Settings")==0 ||
+// 			panel->GetName().compare("Filament Settings") == 0)
+// 			panel->OnActivate();
+// 	}), g_wxTabPanel->GetId() );
+// 	for (size_t i = 0; i < g_wxTabPanel->GetPageCount(); ++ i) {
+// 		Tab *tab = dynamic_cast<Tab*>(g_wxTabPanel->GetPage(i));
+// 		if (! tab)
+// 			continue;
+// 		tab->set_event_value_change(wxEventType(event_value_change));
+// 		tab->set_event_presets_changed(wxEventType(event_presets_changed));
+// 		if (tab->name() == "printer"){
+// 			TabPrinter* tab_printer = static_cast<TabPrinter*>(tab);
+// 			tab_printer->set_event_button_browse(wxEventType(event_button_browse));
+// 			tab_printer->set_event_button_test(wxEventType(event_button_test));
+// 		}
+// 	}
 }
 
 TabIface* get_preset_tab_iface(char *name)
