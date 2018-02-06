@@ -785,7 +785,8 @@ void TabPrint::update()
 
 void TabPrint::OnActivate()
 {
-	m_recommended_thin_wall_thickness_description_line->SetText(PresetHints::recommended_thin_wall_thickness(*m_preset_bundle));
+	m_recommended_thin_wall_thickness_description_line->SetText(
+		PresetHints::recommended_thin_wall_thickness(*m_preset_bundle));
 }
 
 void TabFilament::build()
@@ -915,7 +916,8 @@ void TabFilament::update()
 
 void TabFilament::OnActivate()
 {
-	m_volumetric_speed_description_line->SetText(PresetHints::maximum_volumetric_flow_description(*m_preset_bundle));
+	m_volumetric_speed_description_line->SetText(
+		wxString::FromUTF8(PresetHints::maximum_volumetric_flow_description(*m_preset_bundle).c_str()));
 }
 
 wxSizer* Tab::description_line_widget(wxWindow* parent, ogStaticText* *StaticText)
