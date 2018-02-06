@@ -201,18 +201,18 @@ void create_preset_tabs(PresetBundle *preset_bundle, AppConfig *app_config,
 			panel->GetName().compare("Filament Settings") == 0)
 			panel->OnActivate();
 	}), g_wxTabPanel->GetId() );
-	for (size_t i = 0; i < g_wxTabPanel->GetPageCount(); ++ i) {
-		Tab *tab = dynamic_cast<Tab*>(g_wxTabPanel->GetPage(i));
-		if (! tab)
-			continue;
-		tab->set_event_value_change(wxEventType(event_value_change));
-		tab->set_event_presets_changed(wxEventType(event_presets_changed));
-		if (tab->name() == "printer"){
-			TabPrinter* tab_printer = static_cast<TabPrinter*>(tab);
-			tab_printer->set_event_button_browse(wxEventType(event_button_browse));
-			tab_printer->set_event_button_test(wxEventType(event_button_test));
-		}
-	}
+// 	for (size_t i = 0; i < g_wxTabPanel->GetPageCount(); ++ i) {
+// 		Tab *tab = dynamic_cast<Tab*>(g_wxTabPanel->GetPage(i));
+// 		if (! tab)
+// 			continue;
+// 		tab->set_event_value_change(wxEventType(event_value_change));
+// 		tab->set_event_presets_changed(wxEventType(event_presets_changed));
+// 		if (tab->name() == "printer"){
+// 			TabPrinter* tab_printer = static_cast<TabPrinter*>(tab);
+// 			tab_printer->set_event_button_browse(wxEventType(event_button_browse));
+// 			tab_printer->set_event_button_test(wxEventType(event_button_test));
+// 		}
+// 	}
 }
 
 TabIface* get_preset_tab_iface(char *name)
@@ -314,10 +314,9 @@ void add_created_tab(Tab* panel, PresetBundle *preset_bundle, AppConfig *app_con
 {
 	panel->m_show_btn_incompatible_presets = app_config->get("show_incompatible_presets").empty();
 	panel->create_preset_tab(preset_bundle);
-	wxButton *btn = new wxButton(panel, wxID_ANY, "Ku-ku", wxDefaultPosition, wxDefaultSize, wxBORDER_NONE);
-
+	
 	// Load the currently selected preset into the GUI, update the preset selection box.
-//	panel->load_current_preset();
+	panel->load_current_preset();
 	g_wxTabPanel->AddPage(panel, panel->title());
 }
 
